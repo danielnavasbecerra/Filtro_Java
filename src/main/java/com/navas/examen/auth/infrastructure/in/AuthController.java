@@ -59,7 +59,6 @@ public class AuthController implements AuthService{
                 switch (option) {
                     case 1:
                         registrarPersonaView.start();
-                        MyUtils.displayMessageAndClearScreen("Funcionalidad no implementada...", 2);
                         break;
                     case 2:
                         // CrewController crewController = new CrewController(scanner);
@@ -77,14 +76,10 @@ public class AuthController implements AuthService{
                         MyUtils.displayMessageAndClearScreen("Funcionalidad no implementada...", 2);
                         break;
                     case 5:
-                        // CustomerController customerController = new CustomerController(scanner);
-                        // customerController.run();
-                        MyUtils.displayMessageAndClearScreen("Funcionalidad no implementada...", 2);
+                        actualizarPersonaView.start();
                         break;
                     case 6:
-                        // UserController userController = new UserController(scanner);
-                        // userController.run();
-                        MyUtils.displayMessageAndClearScreen("Funcionalidad no implementada...", 2);
+                        eliminarPersonaView.start();
                         break;
                     case 7:
                         MyUtils.displayMessageAndClearScreen("Saliendo...", 2);
