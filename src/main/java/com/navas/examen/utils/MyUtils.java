@@ -3,7 +3,6 @@ package com.navas.examen.utils;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class MyUtils {
@@ -38,7 +37,7 @@ public class MyUtils {
     }
 
     // method to get a LocalDate
-    public static LocalDate getLocalDateInput(String prompt, Scanner scanner) {
+    public LocalDate getLocalDateInput(String prompt, Scanner scanner) {
         System.out.print(prompt);
         String input = scanner.nextLine();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -52,7 +51,7 @@ public class MyUtils {
     }
 
     // method to get a double
-    public static double getDoubleInput(String prompt, Scanner scanner) throws InputMismatchException {
+    public double getDoubleInput(String prompt, Scanner scanner) {
         System.out.print(prompt);
         double input = scanner.nextDouble();
         scanner.nextLine(); // clear buffer
@@ -65,7 +64,7 @@ public class MyUtils {
     }
 
     // method to get an int
-    public static int getIntInput(String prompt, Scanner scanner) throws InputMismatchException {
+    public static int getIntInput(String prompt, Scanner scanner) {
         System.out.print(prompt);
         int input = scanner.nextInt();
         scanner.nextLine(); // clear buffer
@@ -80,9 +79,8 @@ public class MyUtils {
     // method to get a string
     public static String getInput(String prompt, Scanner scanner) {
         System.out.print(prompt);
-        String input = scanner.nextLine();
         try {
-            return input;
+            return scanner.nextLine();
         } catch (Exception e) {
             System.out.println("Valor inválido. Por favor, introduce un texto.");
             return getInput(prompt, scanner); // Vuelve a pedir la entrada si el valor no es un texto

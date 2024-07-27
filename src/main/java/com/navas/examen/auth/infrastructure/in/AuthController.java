@@ -5,13 +5,35 @@ import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 import com.navas.examen.auth.domain.service.AuthService;
+import com.navas.examen.persona.application.ActualizarPersonaUseCase;
+import com.navas.examen.persona.application.EliminarPersonaUseCase;
+import com.navas.examen.persona.application.RegistrarPersonaUseCase;
+import com.navas.examen.persona.domain.service.PersonaService;
+import com.navas.examen.persona.infrastructure.in.ActualizarPersonaView;
+import com.navas.examen.persona.infrastructure.in.EliminarPersonaView;
+import com.navas.examen.persona.infrastructure.in.RegistrarPersonaView;
+import com.navas.examen.persona.infrastructure.out.PersonaRepository;
 import com.navas.examen.utils.MyUtils;
 
 public class AuthController implements AuthService{
     private final Scanner scanner;
+    private final PersonaService personaService;
+    private final RegistrarPersonaView registrarPersonaView;
+    private final ActualizarPersonaView actualizarPersonaView;
+    private final EliminarPersonaView eliminarPersonaView;
 
     public AuthController(Scanner scanner) {
         this.scanner = scanner;
+        this.personaService = new PersonaRepository();
+
+        RegistrarPersonaUseCase registrarPersonaUseCase = new RegistrarPersonaUseCase(personaService);
+        this.registrarPersonaView = new RegistrarPersonaView(registrarPersonaUseCase, scanner);
+
+        ActualizarPersonaUseCase actualizarPersonaUseCase = new ActualizarPersonaUseCase(personaService);
+        this.actualizarPersonaView = new ActualizarPersonaView(actualizarPersonaUseCase, scanner);
+
+        EliminarPersonaUseCase eliminarPersonaUseCase = new EliminarPersonaUseCase(personaService);
+        this.eliminarPersonaView = new EliminarPersonaView(eliminarPersonaUseCase, scanner);
     }
 
     @Override
@@ -36,8 +58,7 @@ public class AuthController implements AuthService{
 
                 switch (option) {
                     case 1:
-                        // PlaneController planecontroller = new PlaneController(scanner);
-                        // planecontroller.run();
+                        registrarPersonaView.start();
                         MyUtils.displayMessageAndClearScreen("Funcionalidad no implementada...", 2);
                         break;
                     case 2:
